@@ -15,7 +15,7 @@ import com.yedam.common.DataSource;
 import com.yedam.dao.MemberMapper;
 import com.yedam.vo.Member;
 
-@WebServlet("/MemberAddServlet")
+@WebServlet("/html/MemberAddServlet")
 public class MemberAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     public MemberAddServlet() {

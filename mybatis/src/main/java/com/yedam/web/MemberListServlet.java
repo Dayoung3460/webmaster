@@ -14,7 +14,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.yedam.common.DataSource;
 import com.yedam.dao.MemberMapper;
 import com.yedam.vo.Member;
-
+// 해당 url에서 요청이 들어오면 HttpServlet를 상속받고 있는 클래스가 실행됨
 @WebServlet("/MemberListServlet")
 public class MemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -40,18 +40,21 @@ public class MemberListServlet extends HttpServlet {
 				out.print("<hr/>");
 				for(Member member : dao.members()) {
 					out.print("<h4> ID: " + member.getMemberId() + "</h4>");
-					out.print("<br/>");
+					
 					out.print("Name: " + member.getMemberName());
 					out.print("<br/>");
-					out.print("Phone: " + member.getPhone());
-					out.print("<br/>");
-					out.print("CreationDate: " + member.getCreationDate());
-					out.print("<br/>");
-					out.print("Password: " + member.getPassword());
-					out.print("<br/>");
-					out.print("Responsibility: " + member.getResponsibility());
+//					out.print("Phone: " + member.getPhone());
+//					out.print("<br/>");
+//					out.print("CreationDate: " + member.getCreationDate());
+//					out.print("<br/>");
+//					out.print("Password: " + member.getPassword());
+//					out.print("<br/>");
+//					out.print("Responsibility: " + member.getResponsibility());
+//					out.print("<br/>");
+					out.print("<a href='member.action?mid=" + member.getMemberId() + "'>상세 조회</a>");
 					out.print("<hr/>");
 				}
+				
 			}		
 		} catch (Exception e) {
 			response.getWriter().print("NG");
