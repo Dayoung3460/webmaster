@@ -29,12 +29,18 @@ public class FrontController extends HttpServlet{
 		map.put("/memberAddForm.do", new MemberAddFormControl());
 		map.put("/memberAdd.do", new MemberAddControl());
 		map.put("/memberDelete.do", new MemberDeleteControl());
+		
+		map.put("/boardList.do", new BoardListControl());
+		map.put("/board.do", new BoardControl());
+		map.put("/addBoardForm.do", new AddBoardFormControl());
+		map.put("/addBoard.do", new AddBoardControl());
+		map.put("/modifyBoard.do", new modifyBoardControl());
+		map.put("/deleteBoard.do", new deleteBoardControl());
 	};
+
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		System.out.println("service()");
-		
 		String url = req.getRequestURI(); // /FreeBoard/memberAdd.do
 		String context = req.getContextPath(); // /FreeBoard
 		String page = url.substring(context.length()); // /memberAdd.do
