@@ -7,11 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.common.Control;
+import com.yedam.common.SearchDTO;
 import com.yedam.service.BoardService;
 import com.yedam.service.BoardServiceImpl;
 import com.yedam.vo.BoardVO;
 
-public class modifyBoardControl implements Control {
+public class ModifyBoardControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -19,6 +20,15 @@ public class modifyBoardControl implements Control {
 		
 		BoardVO board;
 		int bno = Integer.parseInt(req.getParameter("bno"));
+		String currentPage = req.getParameter("currentPage");
+		String searchCondition = req.getParameter("searchCondition");
+		String keyword = req.getParameter("keyword");
+		
+		SearchDTO search = new SearchDTO();
+		search.setCurrentPage(currentPage);
+		search.setSearchCondition(searchCondition);
+		search.setKeyword(keyword);
+		
 		BoardService svc = new BoardServiceImpl();
 		
 		
@@ -26,6 +36,7 @@ public class modifyBoardControl implements Control {
 			board = svc.searchBoard(bno);
 			
 			req.setAttribute("boardvo", board);
+			req.setAttribute("search", search);
 			req.getRequestDispatcher("WEB-INF/jsp/boardModifyForm.jsp").forward(req, resp);			
 		} else {
 			board = new BoardVO();
@@ -39,7 +50,8 @@ public class modifyBoardControl implements Control {
 			
 			boolean isSuccess = svc.modifyBoard(board);
 			if(isSuccess) {
-				resp.sendRedirect("boardList.do");
+				String redirectPage = "boardList.do?currentPage=" + currentPage + "&searchCondition=" + searchCondition + "&keyword=" + keyword;
+				resp.sendRedirect(redirectPage);
 			} else {
 				req.setAttribute("msg", "수정하는 중 오류가 발생했습니다.");
 				req.getRequestDispatcher("WEB-INF/jsp/boardModifyForm.jsp").forward(req, resp);

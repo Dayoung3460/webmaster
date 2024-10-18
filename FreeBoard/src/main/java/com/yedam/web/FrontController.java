@@ -18,13 +18,11 @@ public class FrontController extends HttpServlet{
 	Map<String, Control> map;
 	
 	public FrontController() {
-//		System.out.println("Instance created");
 		map = new HashMap<>();
 	}
 	
 	@Override
 	public void init() throws ServletException {
-		System.out.println("init()");
 		map.put("/memberList.do", new MemberListControl());
 		map.put("/memberAddForm.do", new MemberAddFormControl());
 		map.put("/memberAdd.do", new MemberAddControl());
@@ -34,8 +32,11 @@ public class FrontController extends HttpServlet{
 		map.put("/board.do", new BoardControl());
 		map.put("/addBoardForm.do", new AddBoardFormControl());
 		map.put("/addBoard.do", new AddBoardControl());
-		map.put("/modifyBoard.do", new modifyBoardControl());
-		map.put("/deleteBoard.do", new deleteBoardControl());
+		map.put("/modifyBoard.do", new ModifyBoardControl());
+//		map.put("/deleteBoard.do", new DeleteBoardControl());
+
+		map.put("/loginForm.do", new LoginControl());
+		map.put("/logout.do", new LogoutControl());
 	};
 
 	

@@ -15,20 +15,59 @@
 		update_date
 		from tbl_board
 		order by
-		board_no
+		board_no desc
 	</select>
 
-	<select id="boardListByPage" resultType="board" parameterType="int">
+	<select id="boardListByPage" resultType="board"
+		parameterType="search">
 		select b.*
-			from (select rownum rn, a.*
-			from (select *
-					from tbl_board
-					order by board_no) a) b
-		where b.rn > (#{page} - 1) * 5 
+		from (select rownum rn, a.*
+		from (select *
+		from tbl_board
+		<!-- 검색조건이 있으면 where 태그를 타고 아니면 안탐 -->
+		<where>
+			<choose>
+				<when test="searchCondition == 'title'">
+				<!-- ||:  문자열을 연결하는 연산자 -->
+					title like '%' || #{keyword} || '%'
+				</when>
+				<when test="searchCondition == 'writer'">
+					writer like '%' || #{keyword} || '%'
+				</when>
+				<when test="searchCondition == 'titleAndWriter'">
+					(title like '%' || #{keyword} || '%')
+					or (writer like '%' || #{keyword} || '%')
+				</when>
+			</choose>
+		</where>
+		order by board_no desc
+		) a
+		) b
+		where b.rn > (#{currentPage} - 1) * 5
 		<!-- 꺽새를 연산자로 쓰기 위해 태그가 아니고 -->
 		<![CDATA[
-		and b.rn <= (#{page} * 5)
+		and b.rn <= (#{currentPage} * 5)
 		]]>
+	</select>
+
+	<select id="boardTotalCount" resultType="int"
+		parameterType="search">
+		select count(1)
+		from tbl_board
+		<where>
+			<choose>
+				<when test="searchCondition == 'title'">
+					title like '%' || #{keyword} || '%'
+				</when>
+				<when test="searchCondition == 'writer'">
+					writer like '%' || #{keyword} || '%'
+				</when>
+				<when test="searchCondition == 'titleAndWriter'">
+					(title like '%' || #{keyword} || '%')
+					or (writer like '%' || #{keyword} || '%')
+				</when>
+			</choose>
+		</where>
 	</select>
 
 	<insert id="insertBoard" parameterType="board">

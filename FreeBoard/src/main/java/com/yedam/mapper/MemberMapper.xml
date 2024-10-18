@@ -35,4 +35,12 @@
   	delete from tbl_member 
   	where member_id = #{memberId}
   </delete>
+  
+  
+  <select id="loginMember" resultType="member">
+  	select *
+  	from tbl_member
+  	where member_id = #{id}
+  	and password = #{pw}
+  </select>
 </mapper>

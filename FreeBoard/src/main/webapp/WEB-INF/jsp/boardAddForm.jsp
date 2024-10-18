@@ -5,6 +5,7 @@
 <h3>글 작성(boardAddForm.jsp)</h3>
 
 <% String msg = (String) request.getAttribute("msg");%>
+<% String logId = (String) session.getAttribute("logId");%>
 <%if(msg != null){ %>
 <p class="text-danger"><%=msg %></p>
 <% }%>
@@ -22,7 +23,7 @@
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td><input class="form-control" type="text" name="writer" /></td>
+			<td><input readonly class="form-control" type="text" name="writer" value="<%=logId%>"/></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">

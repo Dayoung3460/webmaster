@@ -1,69 +1,121 @@
+<%@page import="com.yedam.common.SearchDTO"%>
 <%@page import="com.yedam.common.PageDTO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.yedam.vo.BoardVO"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <jsp:include page="../includes/header.jsp"></jsp:include>
 
-<h3>글 목록</h3>
+<div class="p-3">
+	<h3>글 목록</h3>
+	<form class="row g-3 mt-2 mb-4" action="boardList.do" method="get">
+		<div class="col-md-4">
+			<select name="searchCondition" class="form-select">
+				<option value=""
+					${search.searchCondition.equals("") ? "selected" : ""}>선택하세요</option>
+				<option value="title"
+					${ search.searchCondition.equals("title") ? "selected" : "" }>제목</option>
+				<option value="writer"
+					${ search.searchCondition.equals("writer") ? "selected" : "" }>작성자</option>
+				<option value="titleAndWriter"
+					${ search.searchCondition.equals("titleAndWriter") ? "selected" : "" }>제목
+					& 작성자</option>
+			</select>
+		</div>
+		<div class="col-md-2">
+			<input type="text" class="form-control" name="keyword"
+				value="${ search.keyword }">
+		</div>
+		<div class="col-md-2">
+			<button type="submit" class="btn btn-primary">조회</button>
+		</div>
 
-<%
-List<BoardVO> boardList = (List<BoardVO>) request.getAttribute("boardList");
-PageDTO paging = (PageDTO) request.getAttribute("page");
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-%>
-<p><%=paging %></p>
-<table class="table">
-	<thead>
-		<tr>
-			<th>글번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일자</th>
-		</tr>
-	</thead>
-	<tbody>
-		<%
-		for (BoardVO board : boardList) {
-			String wdate = sdf.format(board.getWriteDate());
-		%>
-		<tr>
-			<td><%=board.getBoardNo()%></td>
-			<td><a href="board.do?bno=<%=board.getBoardNo()%>"><%=board.getTitle()%></a></td>
-			<td><%=board.getWriter()%></td>
-			<td><%=wdate%></td>
-			<td>
-			</td>
-		</tr>
-		<%
-		}
-		%>
-	</tbody>
-</table>
+	</form>
 
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-  
-    <li class="page-item">
-      <a class="page-link">Previous</a>
-    </li>
-    
-    <%for (int p = paging.getStartPage(); p <= paging.getEndPage(); p++) {
-    %>
-    	<li class="page-item"><a class="page-link" href="boardList.do?page=<%=p%>"><%=p%></a></li>
-    <%} %> 
-    
-    
-    <!--  
-    <li class="page-item"><a class="page-link" href="boardList.do?page=2">2</a></li>
-    <li class="page-item"><a class="page-link" href="boardList.do?page=3">3</a></li>
-    -->
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav>
 
+	<table class="table">
+		<thead>
+			<tr>
+				<th>글번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일자</th>
+				<th>조회수</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<c:forEach var="board" items="${ boardList }">
+				<tr>
+					<td><c:out value="${board.boardNo}" /></td>
+					<td><a href='board.do?bno=${board.boardNo}&currentPage=${search.currentPage}&searchCondition=${search.searchCondition}&keyword=${search.keyword}'>${board.title}</a></td>
+					<td><c:out value="${board.writer}" /></td>
+					<td><fmt:formatDate value="${board.writerDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+					<td><c:out value="${board.viewCnt}" /></td>
+				</tr>
+
+
+			</c:forEach>
+			<c:if test="${fn:length(boardList) == 0}">
+				<tr>
+					<td align="center" colspan="5">no data</td>
+				</tr>
+			</c:if>
+
+		</tbody>
+	</table>
+
+	<nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+
+			<c:choose>
+				<c:when test="${ paging.prev }">
+					<li class="page-item"><a class="page-link"
+						href="boardList.do?currentPage=${ paging.startPage - 1 }&searchCondition=${ search.searchCondition }&keyword=${ search.keyword }">Previous</a>
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item disabled"><a class="page-link">Previous</a>
+					</li>
+				</c:otherwise>
+			</c:choose>
+
+			<c:forEach var="p" begin="${ pading.startPage }"
+				end="${ pading.endPage }" step="1">
+				<c:choose>
+					<c:when test="${ paging.currentPage == p }">
+						<li class="page-item active" aria-current="page"><a
+							class="page-link"
+							href="boardList.do?currentPage=${ p }&searchCondition=${ search.searchCondition }&keyword=${ search.keyword }">${ p }</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link"
+							href="boardList.do?currentPage=${ p }&searchCondition=${ search.searchCondition }&keyword=${ search.keyword }">${ p }</a></li>
+
+					</c:otherwise>
+				</c:choose>
+
+			</c:forEach>
+
+
+			<c:choose>
+				<c:when test="${ paging.next }">
+					<li class="page-item"><a class="page-link"
+						href="boardList.do?currentPage=${ paging.endPage + 1 }&searchCondition=${ search.searchCondition }&keyword=${ search.keyword }">Next</a>
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item disabled"><a class="page-link">Next</a></li>
+					</li>
+				</c:otherwise>
+			</c:choose>
+
+		</ul>
+	</nav>
+</div>
 <jsp:include page="../includes/footer.jsp"></jsp:include>

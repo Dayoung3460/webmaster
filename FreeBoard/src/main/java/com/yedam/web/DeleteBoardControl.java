@@ -7,26 +7,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.common.Control;
+import com.yedam.common.SearchDTO;
 import com.yedam.service.BoardServiceImpl;
 
-public class deleteBoardControl implements Control {
+public class DeleteBoardControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		int bno = Integer.parseInt(req.getParameter("bno"));
+		String currentPage = req.getParameter("currentPage");
+		String searchCondition = req.getParameter("searchCondition");
+		String keyword = req.getParameter("keyword");
 		String isConfirmed = (String) req.getParameter("confirm");
 		
-		System.out.println("isConfirmed: " + isConfirmed);
+		SearchDTO search = new SearchDTO();
+		search.setCurrentPage(currentPage);
+		search.setSearchCondition(searchCondition);
+		search.setKeyword(keyword);
 		
 		if(isConfirmed == null) {
 			req.setAttribute("bno", bno);
+			req.setAttribute("search", search);
+			
 			req.getRequestDispatcher("WEB-INF/jsp/boardDelete.jsp").forward(req, resp);
 		} else {
 			BoardServiceImpl boardServiceImpl = new BoardServiceImpl();
 			boolean isSuccess = boardServiceImpl.removeBoard(bno);
 			if (isSuccess) {
-				resp.sendRedirect("boardList.do");
+				String redirectPage = "boardList.do?currentPage=" + currentPage + "&searchCondition=" + searchCondition + "&keyword=" + keyword;
+				resp.sendRedirect(redirectPage);
 			} else {
 				req.setAttribute("msg", "삭제하는 중 오류가 발생했습니다.");
 				req.getRequestDispatcher("WEB-INF/jsp/board.jsp").forward(req, resp);

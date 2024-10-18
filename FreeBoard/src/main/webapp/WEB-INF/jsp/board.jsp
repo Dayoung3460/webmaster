@@ -1,3 +1,4 @@
+<%@page import="com.yedam.common.SearchDTO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.yedam.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,6 +10,7 @@
 <table class="table">
 	<%
 	BoardVO board = (BoardVO) request.getAttribute("boardvo");
+	SearchDTO search = (SearchDTO) request.getAttribute("search");
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	String wdate = sdf.format(board.getWriteDate());
 	%>
@@ -51,10 +53,10 @@
 <script>
 	document.querySelector('.modifyBtn').addEventListener('click', (e) => {
 		// get method
-		location.href = 'modifyBoard.do?bno=<%=board.getBoardNo()%>';
+		location.href = 'modifyBoard.do?bno=<%=board.getBoardNo()%>&currentPage=<%=search.getCurrentPage()%>&searchCondition=<%=search.getSearchCondition()%>&keyword=<%=search.getKeyword()%>';
 	})
 	
 	document.querySelector('.deleteBtn').addEventListener('click', (e) => {
-		location.href = 'deleteBoard.do?bno=<%=board.getBoardNo()%>';
+		location.href = 'deleteBoard.do?bno=<%=board.getBoardNo()%>&currentPage=<%=search.getCurrentPage()%>&searchCondition=<%=search.getSearchCondition()%>&keyword=<%=search.getKeyword()%>';
 	})
 </script>

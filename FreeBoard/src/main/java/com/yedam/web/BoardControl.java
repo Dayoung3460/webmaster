@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.common.Control;
+import com.yedam.common.SearchDTO;
 import com.yedam.service.BoardService;
 import com.yedam.service.BoardServiceImpl;
 import com.yedam.vo.BoardVO;
@@ -17,13 +18,21 @@ public class BoardControl implements Control {
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String bno = req.getParameter("bno");
-		System.out.println("bno: " + bno);	
+		String currentPage = req.getParameter("currentPage");
+		String searchCondition = req.getParameter("searchCondition");
+		String keyword = req.getParameter("keyword");
 		
 		BoardService svc = new BoardServiceImpl();
 		BoardVO board = svc.searchBoard(Integer.parseInt(bno));
-//		
+		
 		req.setAttribute("boardvo", board);
-		System.out.println(board.toString());
+		
+		SearchDTO search = new SearchDTO();
+		search.setCurrentPage(currentPage);
+		search.setSearchCondition(searchCondition);
+		search.setKeyword(keyword);
+		
+		req.setAttribute("search", search);
 
 		req.getRequestDispatcher("WEB-INF/jsp/board.jsp").forward(req, resp);
 

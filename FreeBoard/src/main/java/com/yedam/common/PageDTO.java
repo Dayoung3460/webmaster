@@ -6,17 +6,20 @@ import lombok.Data;
 public class PageDTO {
 	private int startPage, endPage;
 	private boolean prev, next;
+	private int currentPage;
+	private int totalCount;
 	
-	public PageDTO(int page) { 
-		int totalCnt = 46;
+	public PageDTO(int currentPage, int totalCount) { 
+		this.setTotalCount(totalCount);
+		this.currentPage = currentPage;
 		
-		this.endPage = (int) Math.ceil(page / 10.0) * 10; 
+		this.endPage = (int) Math.ceil(currentPage / 10.0) * 10; 
 		this.startPage = this.endPage - 9; 
 		
-		int realEnd = (int) Math.ceil(totalCnt / 5.0);
+		int realEnd = (int) Math.ceil(this.getTotalCount() / 5.0);
 		this.endPage = this.endPage > realEnd ? realEnd : this.endPage;
 		
-		this.prev = startPage > 1;
-		this.next = endPage == realEnd;// 
+		this.prev = this.startPage > 1;
+		this.next = this.endPage < realEnd;
 	}
 }

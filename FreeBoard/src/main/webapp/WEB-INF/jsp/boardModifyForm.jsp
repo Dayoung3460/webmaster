@@ -1,3 +1,4 @@
+<%@page import="com.yedam.common.SearchDTO"%>
 <%@page import="com.yedam.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -7,6 +8,7 @@
 
 <%
 BoardVO board = (BoardVO) request.getAttribute("boardvo");
+SearchDTO search = (SearchDTO) request.getAttribute("search");
 %>
 
 
@@ -39,9 +41,15 @@ BoardVO board = (BoardVO) request.getAttribute("boardvo");
 				value="<%=board.getWriter()%>" /></td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center"><input class="btn btn-primary"
-				type="submit" value="저장" /> <input class="btn btn-danger"
-				type="submit" value="취소" /></td>
+			<td colspan="2" align="center">
+			<input class="btn btn-primary"
+				type="submit" value="저장" /> 
+			<input name="currentPage" value="<%=search.getCurrentPage() %>" hidden="true"/>
+			<input name="searchCondition" value="<%=search.getSearchCondition() %>" hidden="true"/>
+			<input name="keyword" value="<%=search.getKeyword() %>" hidden="true"/>
+			<input class="btn btn-danger"
+				type="submit" value="취소" />
+			</td>
 		</tr>
 	</table>
 </form>

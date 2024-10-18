@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.yedam.common.DataSource;
+import com.yedam.common.SearchDTO;
 import com.yedam.mapper.BoardMapper;
 import com.yedam.vo.BoardVO;
 
@@ -13,11 +14,21 @@ public class AppTest {
 		SqlSession sqlSession = DataSource.getInstance().openSession();
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class); // 구현 클래스 가져온거
 		
-		BoardVO bvo = new BoardVO();
+		SearchDTO search = new SearchDTO();
+		search.setCurrentPage("1");
+		search.setSearchCondition("titleAndWriter");
+		search.setKeyword("user");
+		
+		List<BoardVO> list = mapper.boardListByPage(search);
+		for(BoardVO item : list) {
+			System.out.println(item.toString());
+		}
+		
+//		BoardVO bvo = new BoardVO();
 //		bvo.setTitle("mapper TEST");
 //		bvo.setContent("content!");
 //		bvo.setWriter("user7");
-		bvo.setBoardNo(4);
+//		bvo.setBoardNo(4);
 		
 //		if(mapper.insertBoard(bvo) == 1) {
 //			sqlSession.commit();
@@ -36,10 +47,13 @@ public class AppTest {
 //		} 
 		
 //		List<BoardVO> list = mapper.boardList();
-		List<BoardVO> list = mapper.boardListByPage(1);
-		for(BoardVO bvo2 : list) {
-			System.out.println(bvo2.toString());
-		}
+//		List<BoardVO> list = mapper.boardListByPage(1);
+//		for(BoardVO bvo2 : list) {
+//			System.out.println(bvo2.toString());
+//		}
+		
+		
+		
 		
 	}
 }

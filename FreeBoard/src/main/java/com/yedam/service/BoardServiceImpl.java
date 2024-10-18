@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.yedam.common.DataSource;
+import com.yedam.common.SearchDTO;
 import com.yedam.mapper.BoardMapper;
 import com.yedam.vo.BoardVO;
 
@@ -18,8 +19,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public List<BoardVO> boardListByPage(int page) {
-		return mapper.boardListByPage(page);
+	public List<BoardVO> boardListByPage(SearchDTO search) {
+		return mapper.boardListByPage(search);
+	}
+	
+	@Override
+	public int boardTotalCount(SearchDTO search) {
+		return mapper.boardTotalCount(search);
 	}
 	
 	@Override
@@ -40,6 +46,10 @@ public class BoardServiceImpl implements BoardService {
 		mapper.updateCount(boardNo);
 		return mapper.selectBoard(boardNo);
 	}
+
+	
+
+	
 	
 	
 }
