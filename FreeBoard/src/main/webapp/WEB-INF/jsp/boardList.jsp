@@ -49,25 +49,26 @@
 			</tr>
 		</thead>
 		<tbody>
-
 			<c:forEach var="board" items="${ boardList }">
 				<tr>
-					<td><c:out value="${board.boardNo}" /></td>
-					<td><a href='board.do?bno=${board.boardNo}&currentPage=${search.currentPage}&searchCondition=${search.searchCondition}&keyword=${search.keyword}'>${board.title}</a></td>
+					<td>${board.boardNo}</td>
+					<td><a
+						href="board.do?bno=${board.boardNo}&currentPage=${search.currentPage}&searchCondition=${search.searchCondition}&keyword=${search.keyword}">
+							${board.title} </a></td>
 					<td><c:out value="${board.writer}" /></td>
-					<td><fmt:formatDate value="${board.writerDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+					<td>
+						<fmt:formatDate value="${board.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+					</td>
 					<td><c:out value="${board.viewCnt}" /></td>
 				</tr>
-
-
 			</c:forEach>
 			<c:if test="${fn:length(boardList) == 0}">
 				<tr>
 					<td align="center" colspan="5">no data</td>
 				</tr>
 			</c:if>
-
 		</tbody>
+
 	</table>
 
 	<nav aria-label="Page navigation example">
