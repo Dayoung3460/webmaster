@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<!-- myapp.homepage.tiles 페이지에서 요청시 classic.jsp가 불러와짐 classic.jsp 파일안에서 
+		아래 컴포넌트들을 조합해서 보여줌 
+	<definition name="myapp.homepage"
+		template="/layouts/classic.jsp">
+		<put-attribute name="title"
+			value="Tiles tutorial homepage" />
+		<put-attribute name="header" value="/tiles/banner.jsp" />
+		<put-attribute name="menu"
+			value="/tiles/common_menu.jsp" />
+		<put-attribute name="body" value="/tiles/home_body.jsp" />
+		<put-attribute name="footer" value="/tiles/credits.jsp" />
+	</definition>
+-->
+	
+
+	<definition name="user.home" template="/WEB-INF/layout/user/template.jsp">
+		<put-attribute name="title"
+			value="일반 사용자용 템플릿" />
+		<put-attribute name="body" value="/WEB-INF/layout/user/body.jsp" />
+	</definition>
+	
+	<!-- 아무 페이지.tiles에서 요청 들어오면 myapp.homepage의 body부분만 /tiles/{아무 페이지}.jsp로 
+		불러와짐 -->
+	<definition name="WILDCARD:board/*" extends="user.home">
+		<put-attribute name="body" value="/WEB-INF/jsp/{1}.jsp" />
+	</definition>
+	
+	<definition name="admin.home" template="/WEB-INF/layout/admin/templateAdmin.jsp">
+		<put-attribute name="title"
+			value="관리용 템플릿" />
+		<put-attribute name="body" value="/WEB-INF/layout/admin/body.jsp" />
+	</definition>
+	<definition name="WILDCARD:admin/*" extends="admin.home">
+		<put-attribute name="bodyAdmin" value="/WEB-INF/jsp/{1}.jsp" />
+	</definition>
+	
+	<definition name="WILDCARD:*/*" extends="user.home">
+		<put-attribute name="body" value="/WEB-INF/jsp/{1}/{2}.jsp" />
+	</definition>
+</tiles-definitions>

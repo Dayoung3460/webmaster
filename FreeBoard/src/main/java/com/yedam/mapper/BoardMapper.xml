@@ -72,9 +72,9 @@
 
 	<insert id="insertBoard" parameterType="board">
 		insert into
-		tbl_board(board_no, title, content, writer)
+		tbl_board(board_no, title, content, writer, image)
 		values(board_seq.nextval,
-		#{title}, #{content}, #{writer})
+		#{title}, #{content}, #{writer}, #{image})
 	</insert>
 
 	<update id="updateBoard" parameterType="board">
@@ -110,7 +110,8 @@
 		writer,
 		view_cnt,
 		write_date,
-		update_date
+		update_date,
+		image
 		from tbl_board
 		where
 		board_no = #{boardNo}

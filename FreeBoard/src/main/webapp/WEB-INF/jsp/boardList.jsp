@@ -9,8 +9,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<jsp:include page="../includes/header.jsp"></jsp:include>
-
 <div class="p-3">
 	<h3>글 목록</h3>
 	<form class="row g-3 mt-2 mb-4" action="boardList.do" method="get">
@@ -119,4 +117,3 @@
 		</ul>
 	</nav>
 </div>
-<jsp:include page="../includes/footer.jsp"></jsp:include>

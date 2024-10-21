@@ -34,7 +34,7 @@ public class BoardControl implements Control {
 		
 		req.setAttribute("search", search);
 
-		req.getRequestDispatcher("WEB-INF/jsp/board.jsp").forward(req, resp);
+		req.getRequestDispatcher("board/board.tiles").forward(req, resp);
 
 	}
 

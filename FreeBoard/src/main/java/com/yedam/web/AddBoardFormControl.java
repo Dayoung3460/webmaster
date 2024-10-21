@@ -12,7 +12,7 @@ public class AddBoardFormControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("WEB-INF/jsp/boardAddForm.jsp").forward(req, resp);
+		req.getRequestDispatcher("board/boardAddForm.tiles").forward(req, resp);
 
 	}
 

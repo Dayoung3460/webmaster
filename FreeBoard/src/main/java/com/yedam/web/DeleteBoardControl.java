@@ -30,7 +30,7 @@ public class DeleteBoardControl implements Control {
 			req.setAttribute("bno", bno);
 			req.setAttribute("search", search);
 			
-			req.getRequestDispatcher("WEB-INF/jsp/boardDelete.jsp").forward(req, resp);
+			req.getRequestDispatcher("board/boardDelete.tiles").forward(req, resp);
 		} else {
 			BoardServiceImpl boardServiceImpl = new BoardServiceImpl();
 			boolean isSuccess = boardServiceImpl.removeBoard(bno);
@@ -39,7 +39,7 @@ public class DeleteBoardControl implements Control {
 				resp.sendRedirect(redirectPage);
 			} else {
 				req.setAttribute("msg", "삭제하는 중 오류가 발생했습니다.");
-				req.getRequestDispatcher("WEB-INF/jsp/board.jsp").forward(req, resp);
+				req.getRequestDispatcher("board/boardDelete.tiles").forward(req, resp);
 			}
 		}
 		

@@ -6,6 +6,8 @@
 	<properties resource="config/db.properties"></properties>
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<!-- 값이 없으면 널이 들어가도록 -->
+		<setting name="jdbcTypeForNull" value="VARCHAR"/>
 	</settings>
 	<typeAliases>
 		<typeAlias alias="member" type="com.yedam.vo.MemberVO" />

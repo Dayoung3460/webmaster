@@ -15,7 +15,7 @@ public class LogoutControl implements Control {
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		session.invalidate(); // session 정보 삭제
-		req.getRequestDispatcher("WEB-INF/jsp/loginForm.jsp").forward(req, resp);
+		req.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(req, resp);
 	}
 	
 }

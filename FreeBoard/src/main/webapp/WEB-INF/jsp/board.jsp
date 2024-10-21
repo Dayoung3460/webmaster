@@ -4,7 +4,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<jsp:include page="../includes/header.jsp"></jsp:include>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <h3>상세페이지(board.jsp)</h3>
 <table class="table">
@@ -16,19 +18,27 @@
 	%>
 	<tr>
 		<th>글번호</th>
-		<td><%=board.getBoardNo()%></td>
+		<td>${boardvo.boardNo }</td>
 		<th>조회수</th>
-		<td><%=board.getViewCnt()%></td>
+		<td>${boardvo.viewCnt }</td>
 	</tr>
 	<tr>
 		<th>제목</th>
-		<td colspan="3"><%=board.getTitle()%></td>
+		<td colspan="3">${boardvo.title }</td>
 	</tr>
 	<tr>
 		<th>내용</th>
 		<td colspan="3"><textarea readonly rows="4" cols="30"
 				class="form-control"><%=board.getContent()%></textarea></td>
 	</tr>
+
+	<c:if test="${ boardvo.image != null }">
+		<tr>
+			<th>image</th>
+			<td><img src="image/${ boardvo.image }"></td>
+
+		</tr>
+	</c:if>
 	<tr>
 		<th>작성자</th>
 		<td colspan="3"><%=board.getWriter()%></td>
@@ -39,16 +49,23 @@
 	</tr>
 </table>
 <div align="center">
-	<!-- 
-	<a href="modifyBoard.do?bno=<%=board.getBoardNo()%>"> -->
+
+	<%
+	String logIn = (String) session.getAttribute("logId");
+	%>
+	<%
+	if (board.getWriter().equals(logIn)) {
+	%>
 	<button type="submit" class="btn btn-success modifyBtn">수정</button>
-	<!--</a> -->
+
 	<a><button type="submit" class="btn btn-danger deleteBtn">삭제</button></a>
+
+	<%
+	}
+	%>
 
 </div>
 
-
-<jsp:include page="../includes/footer.jsp"></jsp:include>
 
 <script>
 	document.querySelector('.modifyBtn').addEventListener('click', (e) => {

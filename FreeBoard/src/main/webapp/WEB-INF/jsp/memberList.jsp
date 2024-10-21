@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@page import="com.yedam.vo.MemberVO"%>
 <%@page import="java.util.List"%>
-<jsp:include page="../includes/header.jsp"></jsp:include>
-
 
 <h3>Member List</h3>
 <% 
@@ -37,5 +35,3 @@
 </tbody>
 </table>	
 <a class="btn btn-success" href='memberAddForm.do'>추가</a>
-
-<jsp:include page="../includes/footer.jsp"></jsp:include>

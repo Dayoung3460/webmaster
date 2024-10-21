@@ -15,6 +15,6 @@ public class MemberAddFormControl implements Control {
 	// WEB-INF 폴더는 외부에서 접근 불가
 	// 바로 url 치고 들어갈 수 없게 jsp 폴더를 WEB-INF 안으로 넣음
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("WEB-INF/jsp/memberAddForm.jsp").forward(req, resp);
+		req.getRequestDispatcher("admin/memberAddForm.tiles").forward(req, resp);
 	}
 }

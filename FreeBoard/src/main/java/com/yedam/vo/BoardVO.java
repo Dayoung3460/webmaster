@@ -15,4 +15,6 @@ public class BoardVO {
 	private Date writeDate;
 	private Date updateDate;
 	private int totalCount;
+	
+	private String image;
 }

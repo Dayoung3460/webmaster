@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="../includes/header.jsp"></jsp:include>
 
 <h3>글 작성(boardAddForm.jsp)</h3>
 
@@ -10,7 +9,8 @@
 <p class="text-danger"><%=msg %></p>
 <% }%>
 
-<form class="form-control" action="addBoard.do" method="get">
+<form class="form-control" action="addBoard.do" method="post" enctype="multipart/form-data">
+
 	<table class="table">
 		<tr>
 			<th>제목</th>
@@ -26,6 +26,10 @@
 			<td><input readonly class="form-control" type="text" name="writer" value="<%=logId%>"/></td>
 		</tr>
 		<tr>
+			<th>image</th>
+			<td><input class="form-control" type="file" name="image"></td>
+		</tr>
+		<tr>
 			<td colspan="2" align="center">
 				<input class="btn btn-primary" type="submit" value="저장" /> 
 				<input class="btn btn-warning" type="submit" value="취소" />
@@ -34,5 +38,3 @@
 
 	</table>
 </form>
-
-<jsp:include page="../includes/footer.jsp"></jsp:include>

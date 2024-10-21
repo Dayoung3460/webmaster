@@ -23,7 +23,7 @@
 				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberList.do">회원목록</a> 
 				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberAddForm.do">회원 등록</a>
 				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardList.do">게시글 목록</a>
-				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="addBoard.do">게시글 작성</a>
+				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="addBoardForm.do">게시글 작성</a>
 				
 				
 				<% 

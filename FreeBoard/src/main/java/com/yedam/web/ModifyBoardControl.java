@@ -37,7 +37,7 @@ public class ModifyBoardControl implements Control {
 			
 			req.setAttribute("boardvo", board);
 			req.setAttribute("search", search);
-			req.getRequestDispatcher("WEB-INF/jsp/boardModifyForm.jsp").forward(req, resp);			
+			req.getRequestDispatcher("board/boardModifyForm.tiles").forward(req, resp);			
 		} else {
 			board = new BoardVO();
 			
@@ -54,7 +54,7 @@ public class ModifyBoardControl implements Control {
 				resp.sendRedirect(redirectPage);
 			} else {
 				req.setAttribute("msg", "수정하는 중 오류가 발생했습니다.");
-				req.getRequestDispatcher("WEB-INF/jsp/boardModifyForm.jsp").forward(req, resp);
+				req.getRequestDispatcher("board/boardModifyForm.tiles").forward(req, resp);
 			}
 		}
 		
