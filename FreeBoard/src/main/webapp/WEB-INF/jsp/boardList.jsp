@@ -84,8 +84,8 @@
 				</c:otherwise>
 			</c:choose>
 
-			<c:forEach var="p" begin="${ pading.startPage }"
-				end="${ pading.endPage }" step="1">
+			<c:forEach var="p" begin="${ paging.startPage }"
+				end="${ paging.endPage }" step="1">
 				<c:choose>
 					<c:when test="${ paging.currentPage == p }">
 						<li class="page-item active" aria-current="page"><a

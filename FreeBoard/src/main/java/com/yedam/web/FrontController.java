@@ -5,12 +5,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.common.Control;
+import com.yedam.control.JavascriptControl;
+import com.yedam.control.reply.ReplyListControl;
+import com.yedam.control.reply.WriteReplyControl;
+
+import src.yedam.control.board.AddBoardControl;
+import src.yedam.control.board.AddBoardFormControl;
+import src.yedam.control.board.BoardControl;
+import src.yedam.control.board.BoardListControl;
+import src.yedam.control.board.DeleteBoardControl;
+import src.yedam.control.board.ModifyBoardControl;
+import src.yedam.control.member.LoginControl;
+import src.yedam.control.member.LogoutControl;
+import src.yedam.control.member.MemberAddControl;
+import src.yedam.control.member.MemberAddFormControl;
+import src.yedam.control.member.MemberAddJsonControl;
+import src.yedam.control.member.MemberDeleteControl;
+import src.yedam.control.member.MemberDeleteJsonControl;
+import src.yedam.control.member.MemberJsonControl;
+import src.yedam.control.member.MemberListControl;
+
+
 
 // .do로 끝나는 url에서 요청이 들어올 때 
 //@WebServlet("*.do")
@@ -38,6 +58,13 @@ public class FrontController extends HttpServlet{
 		map.put("/loginForm.do", new LoginControl());
 		map.put("/logout.do", new LogoutControl());
 		map.put("/javascript.do", new JavascriptControl());
+		
+		map.put("/memberJson.do", new MemberJsonControl());
+		map.put("/memberDeleteJson.do", new MemberDeleteJsonControl());
+		map.put("/memberAddJson.do", new MemberAddJsonControl());
+		
+		map.put("/replyList.do", new ReplyListControl());
+		map.put("/writeReply.do", new WriteReplyControl());
 	};
 
 	

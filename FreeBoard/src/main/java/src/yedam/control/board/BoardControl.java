@@ -1,4 +1,4 @@
-package com.yedam.web;
+package src.yedam.control.board;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.common.Control;
 import com.yedam.common.SearchDTO;
+import com.yedam.control.reply.ReplyListControl;
 import com.yedam.service.BoardService;
 import com.yedam.service.BoardServiceImpl;
 import com.yedam.vo.BoardVO;
@@ -36,6 +37,7 @@ public class BoardControl implements Control {
 
 		req.getRequestDispatcher("board/board.tiles").forward(req, resp);
 
+		
 	}
 
 }

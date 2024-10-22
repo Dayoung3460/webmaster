@@ -66,14 +66,41 @@
 
 </div>
 
+<h4>===========================Reply==============================</h4>
+
+<table class="dataTable table">
+	<thead>
+		<tr>
+			<th>replyNo</th>
+			<th>reply</th>
+			<th>replyer</th>
+			<th>replyDate</th>
+			<th>remove</th>
+		</tr>
+	</thead>
+	<tbody>
+
+	</tbody>
+</table>
+
+
+<textarea class="form-control" placeholder="write comment"></textarea>
+<button class="btn btn-primary addReplyBtn">Done</button>
 
 <script>
-	document.querySelector('.modifyBtn').addEventListener('click', (e) => {
+	let bno = ${boardvo.boardNo}
+
+
+	document.querySelector('.modifyBtn')?.addEventListener('click', (e) => {
 		// get method
 		location.href = 'modifyBoard.do?bno=<%=board.getBoardNo()%>&currentPage=<%=search.getCurrentPage()%>&searchCondition=<%=search.getSearchCondition()%>&keyword=<%=search.getKeyword()%>';
 	})
 	
-	document.querySelector('.deleteBtn').addEventListener('click', (e) => {
+	document.querySelector('.deleteBtn')?.addEventListener('click', (e) => {
 		location.href = 'deleteBoard.do?bno=<%=board.getBoardNo()%>&currentPage=<%=search.getCurrentPage()%>&searchCondition=<%=search.getSearchCondition()%>&keyword=<%=search.getKeyword()%>';
 	})
+	
+	
 </script>
+<script src="js/replyService.js"></script>
+<script src="js/reply.js"></script>

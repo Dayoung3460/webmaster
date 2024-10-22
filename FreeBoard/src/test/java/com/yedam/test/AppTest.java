@@ -5,24 +5,27 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.yedam.common.DataSource;
-import com.yedam.common.SearchDTO;
-import com.yedam.mapper.BoardMapper;
+import com.yedam.mapper.ReplyMapper;
 import com.yedam.vo.BoardVO;
+import com.yedam.vo.ReplyVO;
 
 public class AppTest {
 	public static void main(String[] args) {
 		SqlSession sqlSession = DataSource.getInstance().openSession();
-		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class); // 구현 클래스 가져온거
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class); // 구현 클래스 가져온거
 		
-		SearchDTO search = new SearchDTO();
-		search.setCurrentPage("1");
-		search.setSearchCondition("titleAndWriter");
-		search.setKeyword("user");
+//		ReplyVO reply = new ReplyVO();
+//		reply.setReply("ReplyReplyReplyReply");
+//		reply.setReplyer("user2");
+//		reply.setBoardNo(596);
+//		
+		ReplyVO reply = mapper.selectReply(2);
+		System.out.println("success: " + reply.toString());
 		
-		List<BoardVO> list = mapper.boardListByPage(search);
-		for(BoardVO item : list) {
-			System.out.println(item.toString());
-		}
+		
+//		for(ReplyVO item : reply) {
+//			System.out.println("print2: " + item.toString());
+//		}
 		
 //		BoardVO bvo = new BoardVO();
 //		bvo.setTitle("mapper TEST");
