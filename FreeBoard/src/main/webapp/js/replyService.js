@@ -10,62 +10,48 @@ const svc = {
 }
  */
 
-const getList = (bno, success, fail) => {
-	fetch(`replyList.do?bno=${bno}`).then((resolve) => {
+const getReplyList = (param = {bno, currentPage}, success) => {
+	fetch(`replyList.do?bno=${param.bno}&currentPage=${param.currentPage}`)
+		.then((resolve) => {
 			return resolve.json()
-		}).then(success).catch(fail)
+		}).then(success)
+		.catch((err) => {
+			console.log(err)
+		})
+}
+
+const getReplyCount = (bno, success) => {
+	fetch(`countReply.do?bno=${bno}`)
+		.then((resolve) => {
+			return resolve.json()
+		}).then(success)
+		.catch((err) => {
+			console.log(err)
+		})
 }
 
 
-
-const writeReply = (bno, success, fail) => {
-	fetch(`replyList.do?bno=${bno}`).then((resolve) => {
-			return resolve.json()
-		}).then(success).catch(fail)
-}
-
-const showList = (data) => {
-	let tbodyEle = document.querySelector('.dataTable tbody')
-	tbodyEle.innerHTML = ''
-
-	data.forEach((item) => {
-		let trEle = makeRow(item)
-
-		trEle.addEventListener('mouseover', (e) => {
-			e.currentTarget.style.backgroundColor = 'gray'
-		})
-
-		trEle.addEventListener('mouseout', (e) => {
-			e.currentTarget.style.backgroundColor = 'transparent'
-		})
-
-
-		tbodyEle.appendChild(trEle)
+const addReply = (reply, bno, success) => {
+	fetch(`addReply.do?reply=${reply}&bno=${bno}`).then((resolve) => {
+		return resolve.json()
+	}).then(success).catch((err) => {
+		console.log(err)
 	})
 }
 
-const FIELDS = ['replyNo', 'reply', 'replyer', 'replyDate', 'remove']
-const makeRow = (item) => {
-	let trEle = document.createElement('tr')
-
-
-	FIELDS.forEach((field) => {
-		let tdEle = document.createElement('td')
-		if (field !== 'remove') {
-			tdEle.innerText = item[field]
-		} else {
-			let btnEle = document.createElement('button')
-			btnEle.innerText = field
-			tdEle.appendChild(btnEle)
-
-			if (field === 'remove') {
-				btnEle.addEventListener('click', (e) => {
-					deleteMember(item)
-				})
-			}
-		}
-
-		trEle.appendChild(tdEle)
+const deleteReply = (replyNo, success) => {
+	fetch(`deleteReply.do?replyNo=${replyNo}`).then((resolve) => {
+		return resolve.json()
+	}).then(success).catch((err) => {
+		console.log(err)
 	})
-	return trEle
 }
+
+const editReply = (replyNo, reply, success) => {
+	fetch(`updateReply.do?replyNo=${replyNo}&reply=${reply}`).then((resolve) => {
+		return resolve.json()
+	}).then(success).catch((err) => {
+		console.log(err)
+	})
+}
+

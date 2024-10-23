@@ -14,8 +14,8 @@ public class ReplyServiceImpl implements ReplyService {
 	
 	
 	@Override
-	public List<ReplyVO> replyList(int boardNo) {
-		return mapper.replyList(boardNo);
+	public List<ReplyVO> replyList2(int boardNo) {
+		return mapper.replyList2(boardNo);
 	}
 
 	
@@ -32,8 +32,25 @@ public class ReplyServiceImpl implements ReplyService {
 	public ReplyVO searchReply(int replyNo) {
 		return mapper.selectReply(replyNo);
 	}
-	
-	
+
+
+	@Override
+	public boolean editReply(ReplyVO reply) {
+		return mapper.updateReply(reply) == 1;
+	}
+
+
+	@Override
+	public List<ReplyVO> replyList(int boardNo, int page) {
+		// TODO Auto-generated method stub
+		return mapper.replyList(boardNo, page);
+	}
+
+
+	@Override
+	public int countReply(int boardNo) {
+		return mapper.countReply(boardNo);
+	}
 
 	
 	

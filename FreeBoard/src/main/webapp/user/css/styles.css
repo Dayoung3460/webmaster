@@ -11,6 +11,38 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
  
+ #custom
+
+.reply li {
+	display: flex;
+}
+
+#replyList {
+	display: flex;
+}
+
+.paginationNav,
+.pageList {
+	display: flex;
+	justify-content: center;
+}
+
+.editTextarea {
+	outline: none;
+    border: none !important;
+    resize: none;
+    background-color: transparent !important;
+}
+ 
+ 
+.hide {
+	display: none;
+}
+
+.show {
+	display: block;
+}
+ 
  
  a {color: #fff; text-decoration: none; outline: none} a:hover, a:active {text-decoration: none; color:#fff; background-color:#f59000;}
 
@@ -189,6 +221,7 @@ address {
 ol,
 ul {
   padding-left: 2rem;
+  list-style: none;
 }
 
 ol,
@@ -196,6 +229,7 @@ ul,
 dl {
   margin-top: 0;
   margin-bottom: 1rem;
+  list-style: none;
 }
 
 ol ol,
@@ -10867,3 +10901,11 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     margin-left: -15rem;
   }
 }
+
+
+
+
+
+
+
+

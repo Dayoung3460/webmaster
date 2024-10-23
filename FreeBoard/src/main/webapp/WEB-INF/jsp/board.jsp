@@ -68,6 +68,7 @@
 
 <h4>===========================Reply==============================</h4>
 
+
 <table class="dataTable table">
 	<thead>
 		<tr>
@@ -76,6 +77,7 @@
 			<th>replyer</th>
 			<th>replyDate</th>
 			<th>remove</th>
+			<th>edit</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -83,12 +85,41 @@
 	</tbody>
 </table>
 
+<nav class="paginationNav" aria-label="Page navigation example">
+	<ul class="pagination">
+		<li class="page-item previous"><a class="page-link" href="#"
+			aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+		</a></li>
+		<li class="pageList">
+		</li>
+		<li class="page-item next"><a class="page-link" href="#"
+			aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+		</a></li>
+	</ul>
+</nav>
 
-<textarea class="form-control" placeholder="write comment"></textarea>
+
+<!-- 댓글등록, 목록, 페이징 
+<div class="container reply">
+	<div class="content">
+		<ul>
+			<li id="replyList" class="row">
+				<span class="col-sm-2">글번호</span>
+				<span class="col-sm-5">내용</span>
+				<span class="col-sm-2">작성자</span>
+				<span class="col-sm-2">삭제</span>
+			</li>
+		</ul>
+	</div>
+ 
+</div>
+-->
+<textarea class="form-control replyTextarea" placeholder="write comment"></textarea>
 <button class="btn btn-primary addReplyBtn">Done</button>
 
 <script>
-	let bno = ${boardvo.boardNo}
+	let bno = "${boardvo.boardNo}"
+	let logId = "${logId}"
 
 
 	document.querySelector('.modifyBtn')?.addEventListener('click', (e) => {

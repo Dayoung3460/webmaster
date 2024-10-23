@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.yedam.common.Control;
 import com.yedam.control.JavascriptControl;
 import com.yedam.control.reply.ReplyListControl;
-import com.yedam.control.reply.WriteReplyControl;
+import com.yedam.control.reply.UpdateReplyControl;
+import com.yedam.control.reply.AddReplyControl;
+import com.yedam.control.reply.CountReplyControl;
+import com.yedam.control.reply.DeleteReplyControl;
 
 import src.yedam.control.board.AddBoardControl;
 import src.yedam.control.board.AddBoardFormControl;
@@ -64,7 +67,10 @@ public class FrontController extends HttpServlet{
 		map.put("/memberAddJson.do", new MemberAddJsonControl());
 		
 		map.put("/replyList.do", new ReplyListControl());
-		map.put("/writeReply.do", new WriteReplyControl());
+		map.put("/addReply.do", new AddReplyControl());
+		map.put("/deleteReply.do", new DeleteReplyControl());
+		map.put("/updateReply.do", new UpdateReplyControl());
+		map.put("/countReply.do", new CountReplyControl());
 	};
 
 	

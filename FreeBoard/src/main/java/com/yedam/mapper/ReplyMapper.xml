@@ -4,7 +4,24 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yedam.mapper.ReplyMapper">
 
-	<select id="replyList" parameterType="int">
+	<select id="replyList" parameterType="int" resultType="reply">
+		select a.*
+		from (select /*+ index_desc (r pk_reply) */ rownum rn, r.*
+		from tbl_reply r
+		where board_no = #{bno}) a
+		where a.rn > (#{page} - 1) * 5
+		<![CDATA[
+		and a.rn <= (#{page} * 5)
+		]]>
+	</select>
+	
+	<select id="countReply" parameterType="int">
+		select count(1)
+		from tbl_reply
+		where board_no = #{board_no}
+	</select>
+
+	<select id="replyList2" parameterType="int">
 		select reply_no,
 		reply,
 		replyer,
@@ -13,19 +30,25 @@
 		from tbl_reply
 		where board_no = #{boardNo}
 		order by reply_no desc
-		
 	</select>
 
-	
 	<insert id="insertReply" parameterType="reply">
+		<!-- order="BEFORE": 쿼리 시작전에 -->
+		<!-- keyProperty: select reply_seq.nextval from dual 로 얻어진 값을 ReplyVO 객체의 
+			replyNo 필드에 넣음 -->
+		<!-- 그럼 replyNo 필드를 쿼리에서 사용가능해지지 -->
+		<!-- MyBatis 에서는 selectKey사용하여 디비에서 생성된 키값을 자동으로 객체에 설정할 수 있음 -->
+		<selectKey keyProperty="replyNo" order="BEFORE"
+			resultType="int">
+			select reply_seq.nextval from dual
+		</selectKey>
 		insert into
 		tbl_reply(reply_no, reply, replyer, board_no)
-		values(reply_seq.nextval,
-		#{reply}, #{replyer}, #{boardNo})
+		values(#{replyNo}, #{reply}, #{replyer}, #{boardNo})
 	</insert>
 
-	
-	
+
+
 
 	<delete id="deleteReply" parameterType="int">
 		delete from tbl_reply
@@ -41,5 +64,13 @@
 		from tbl_reply
 		where reply_no = #{replyNo}
 	</select>
+
+	<update id="updateReply" parameterType="reply">
+		update tbl_reply
+		set
+		reply_date = sysdate,
+		reply = #{reply}
+		where reply_no = #{replyNo}
+	</update>
 
 </mapper>
