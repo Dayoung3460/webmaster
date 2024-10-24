@@ -53,6 +53,12 @@
 				<a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
 					href="javascript.do">javascript 연습</a>
+					<a
+					class="list-group-item list-group-item-action list-group-item-light p-3"
+					href="chart.do">chart 연습</a>
+					<a
+					class="list-group-item list-group-item-action list-group-item-light p-3"
+					href="calendar.do">Calendar 연습</a>
 			</div>
 		</div>
 		<div id="page-content-wrapper">

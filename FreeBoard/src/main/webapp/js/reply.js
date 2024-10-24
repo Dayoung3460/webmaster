@@ -11,7 +11,9 @@ let prev, next
 
 
 const createPageList = () => {
-
+	if (currentPage > realEnd) {
+		currentPage = realEnd
+	}
 	endPage = Math.ceil(currentPage / 5) * 5
 	startPage = endPage - 4
 
@@ -20,6 +22,13 @@ const createPageList = () => {
 
 	prev = startPage > 1
 	next = endPage < realEnd
+
+	console.log('currentPage', currentPage)
+	console.log('startPage', startPage)
+	console.log('endPage', endPage)
+	console.log('realEnd', realEnd)
+	console.log('prev', prev)
+	console.log('next', next)
 }
 
 const printPageList = () => {
@@ -184,15 +193,23 @@ const makeRow = (item) => {
 			tdEle.appendChild(btnEle)
 
 			if (field === 'remove') {
+
 				btnEle.addEventListener('click', (e) => {
 					deleteReply(item.replyNo, (result) => {
-						console.log('delete')
 						if (currentPage <= 0 || currentPage > realEnd || !result) {
 							return
 						}
-						getReplyList({ bno, currentPage }, (result) => { showList(result) })
-						createPageList()
-						printPageList()
+
+						getReplyCount(bno, (result) => {
+							console.log('remove2')
+							totalCnt = result.replyCount
+							createPageList()
+							printPageList()
+
+							getReplyList({ bno, currentPage }, (result) => { showList(result) })
+						})
+
+
 					}
 					)
 				})

@@ -1,6 +1,7 @@
 package com.yedam.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -45,6 +46,11 @@ public class BoardServiceImpl implements BoardService {
 		// 글이 조회될 때마다 viewCnt+1
 		mapper.updateCount(boardNo);
 		return mapper.selectBoard(boardNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> countByWriter() {
+		return mapper.countByWriter();
 	}
 
 	

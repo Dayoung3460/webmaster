@@ -4,23 +4,35 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.yedam.common.DataSource;
-import com.yedam.mapper.ReplyMapper;
-import com.yedam.vo.BoardVO;
-import com.yedam.vo.ReplyVO;
+import com.yedam.service.CalendarService;
+import com.yedam.service.CalendarServiceImpl;
+import com.yedam.vo.CalendarVO;
 
 public class AppTest {
 	public static void main(String[] args) {
 		SqlSession sqlSession = DataSource.getInstance().openSession();
-		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class); // 구현 클래스 가져온거
+		//ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class); // 구현 클래스 가져온거
+
+//		BoardService svc = new BoardServiceImpl();
+		CalendarServiceImpl svc = new CalendarServiceImpl();
+		List<CalendarVO> result = svc.eventList();
+		
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json = gson.toJson(result);
+				
+		System.out.println(json);
+		
 		
 //		ReplyVO reply = new ReplyVO();
 //		reply.setReply("ReplyReplyReplyReply");
 //		reply.setReplyer("user2");
 //		reply.setBoardNo(596);
 //		
-		ReplyVO reply = mapper.selectReply(2);
-		System.out.println("success: " + reply.toString());
+//		ReplyVO reply = mapper.selectReply(2);
+//		System.out.println("success: " + reply.toString());
 		
 		
 //		for(ReplyVO item : reply) {

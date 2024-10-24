@@ -16,4 +16,6 @@ public interface ReplyMapper {
 	ReplyVO selectReply(int replyNo);
 	int updateReply(ReplyVO reply);
 	int countReply(int boardNo);
+	
+	
 }

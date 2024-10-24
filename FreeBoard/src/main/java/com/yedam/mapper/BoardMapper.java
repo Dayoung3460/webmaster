@@ -1,6 +1,7 @@
 package com.yedam.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yedam.common.SearchDTO;
 import com.yedam.vo.BoardVO;
@@ -17,4 +18,6 @@ public interface BoardMapper {
 	BoardVO selectBoard(int boardNo);
 	int updateCount(int boardNo);
 	
+	// 사용자별 게시글 작성개수
+	List<Map<String, Object>> countByWriter();
 }

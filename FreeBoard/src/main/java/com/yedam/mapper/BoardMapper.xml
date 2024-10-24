@@ -28,7 +28,7 @@
 		<where>
 			<choose>
 				<when test="searchCondition == 'title'">
-				<!-- ||:  문자열을 연결하는 연산자 -->
+					<!-- ||: 문자열을 연결하는 연산자 -->
 					title like '%' || #{keyword} || '%'
 				</when>
 				<when test="searchCondition == 'writer'">
@@ -36,7 +36,8 @@
 				</when>
 				<when test="searchCondition == 'titleAndWriter'">
 					(title like '%' || #{keyword} || '%')
-					or (writer like '%' || #{keyword} || '%')
+					or (writer like
+					'%' || #{keyword} || '%')
 				</when>
 			</choose>
 		</where>
@@ -64,7 +65,8 @@
 				</when>
 				<when test="searchCondition == 'titleAndWriter'">
 					(title like '%' || #{keyword} || '%')
-					or (writer like '%' || #{keyword} || '%')
+					or (writer like
+					'%' || #{keyword} || '%')
 				</when>
 			</choose>
 		</where>
@@ -115,6 +117,14 @@
 		from tbl_board
 		where
 		board_no = #{boardNo}
+	</select>
+
+	<select id="countByWriter" resultType="hashmap">
+		select writer as "writer", member_name as "member_name", count(1) as "count"
+		from tbl_board b
+		join tbl_member m
+		on b.writer = m.member_id
+		group by writer, member_name
 	</select>
 
 </mapper>
