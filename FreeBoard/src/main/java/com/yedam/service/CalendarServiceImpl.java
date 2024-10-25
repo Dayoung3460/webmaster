@@ -24,7 +24,7 @@ public class CalendarServiceImpl implements CalendarService{
 
 	@Override
 	public boolean removeEvent(int eventNo) {
-		return mapper.deleteEvent(eventNo) == 1;
+		return mapper.deleteEvent(eventNo) > 0;
 	}
 
 	@Override
