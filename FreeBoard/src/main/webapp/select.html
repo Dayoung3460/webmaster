@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+</script>
+</head>
+
+<body>
+	<select multiple style="height: 150px">
+		<option>option1</option>
+		<option>option2</option>
+		<option>option3</option>
+		<option>option4</option>
+		<option>option5</option>
+	</select>
+	<button>+</button>
+	<button>-</button>
+	<select multiple style="height: 150px">
+		<option>option6</option>
+		<option>option7</option>
+		<option>option8</option>
+		<option>option9</option>
+		<option>option10</option>
+	</select>
+</body>
+<script>
+/*
+
+	let plusBtn = document.getElementsByTagName('button')[0]
+	let minusBtn = document.getElementsByTagName('button')[1]
+	
+	let leftBox = document.getElementsByTagName('select')[0]
+	let rightBox = document.getElementsByTagName('select')[1]
+	
+	plusBtn.addEventListener('click', (e) => {
+		let moveItem = []
+		for(let item of leftBox) {
+			if(item.selected) {
+				item.style.display = 'none'
+				moveItem.push(item)
+				item.style.display = 'block'
+				item.selected = false
+			}
+		}
+		moveItem.forEach((item) => {
+			rightBox.append(item)
+		})
+	})
+	
+	minusBtn.addEventListener('click', (e) => {
+		let moveItem = []
+		for(let item of rightBox) {
+			if(item.selected) {
+				item.style.display = 'none'
+				moveItem.push(item)
+				item.style.display = 'block'
+				item.selected = false
+			}
+		}
+		moveItem.forEach((item) => {
+			leftBox.append(item)
+		})
+	})
+	*/
+	
+	
+	$(function(){
+		$('button:eq(0)').on('click', function() {
+			$('select:eq(1)').append($('select:eq(0) option:selected'))
+		})
+		
+		$('button:eq(1)').on('click', function() {
+			$('select:eq(0)').append($('select:eq(1) option:selected'))
+		})
+	})
+	
+	
+	
+</script>
+
+</html>

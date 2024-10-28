@@ -4,13 +4,24 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
 // 달력생성함수.
 function createCalender(target) {
-	let firstDay = new Date('2024-10-01').getDay()
-	console.log(firstDay)
+	let firstDay = new Date('2024-10-01').getDay() 
 	
 	let tr = document.createElement('tr');
+	
+	
 	for (let d = 1; d <= 31; d++) {
 		let td = document.createElement('td');
-		td.innerHTML = d;
+		
+		
+	
+		if(firstDay === d) {
+			td.innerHTML = null;
+		} else {
+			td.innerHTML = day;
+			
+		}
+		
+		
 		tr.appendChild(td);
 		if (d % 7 == 0) {
 			document.querySelector('#list').appendChild(tr);

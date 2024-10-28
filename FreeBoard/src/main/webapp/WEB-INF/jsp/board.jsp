@@ -133,5 +133,7 @@
 	
 	
 </script>
+<script src="js/jquery-3.7.1.js"></script>
 <script src="js/replyService.js"></script>
-<script src="js/reply.js"></script>
+<!--<script src="js/reply.js"></script>-->
+<script src="js/jreply.js"></script>
