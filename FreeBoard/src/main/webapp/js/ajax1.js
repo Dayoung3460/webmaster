@@ -60,7 +60,7 @@ function makeRow(item) {
 
 		trEle.appendChild(tdEle)
 	})
-	return trEle
+	return trEle     
 }
 let addBtn = document.getElementById('addBtn')
 addBtn.addEventListener('click', (e) => {
